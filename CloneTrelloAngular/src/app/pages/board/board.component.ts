@@ -4,11 +4,14 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Column, ToDo } from '../../models/todo.model';
+import {DialogModule} from '@angular/cdk/dialog';
+import { Dialog } from '@angular/cdk/dialog';
+import { TodoDialogComponent } from '../../components/todo-dialog/todo-dialog.component';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, DragDropModule, NavbarComponent],
+  imports: [CommonModule, DragDropModule, NavbarComponent, TodoDialogComponent, DialogModule],
   styles: [
         `/* Animate items as they're being sorted. */
       .cdk-drop-list-dragging .cdk-drag {
@@ -62,7 +65,7 @@ export class BoardComponent implements OnInit{
   doing: ToDo[] = []
   done: ToDo[] = []
 
-  constructor() {}
+  constructor(private dialog: Dialog) {}
 
   ngOnInit(): void {
     
@@ -87,5 +90,13 @@ export class BoardComponent implements OnInit{
       title: 'New Column',
       todos: []
     })
+  }
+
+  openDialog(){
+    this.dialog.open(TodoDialogComponent, {
+      minWidth : '300px',
+      maxHeight: '50%',
+      autoFocus: false
+    });
   }
 }

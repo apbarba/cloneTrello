@@ -1,5 +1,5 @@
-<button 
-    class="text-white w-full px-5 py-2 font-medium rounded text-sm bg-green-700 hover:bg-green-800 focus:ring-green-300" 
-    [type]="typeBtn">
-    <ng-content></ng-content>
+<button [type]="typeBtn" [ngClass]="colors" class="p-2 rounded">
+  <ng-content></ng-content>
 </button>
+
+  
