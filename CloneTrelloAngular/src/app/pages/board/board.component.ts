@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
@@ -92,11 +92,14 @@ export class BoardComponent implements OnInit{
     })
   }
 
-  openDialog(){
-    this.dialog.open(TodoDialogComponent, {
-      minWidth : '300px',
-      maxHeight: '50%',
-      autoFocus: false
+  openDialog(todo: ToDo) {
+  const dialogRef =  this.dialog.open(TodoDialogComponent, {
+      data: { todo: todo },
+      minWidth: '300px',
+      maxHeight: '50%'
     });
+    dialogRef.closed.subscribe(output => {
+      console.log(output);
+    })
   }
 }
